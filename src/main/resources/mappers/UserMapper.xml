@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.open.ssm.dao.UserDao">
+	<resultMap type="User" id="UserResult">
+		<!-- 数据库字段和实体类属性映射关系，名称一样的字段可以无需映射。column对应数据库的实际字段，property对应实体类的属性 -->
+		<result column="USER_CODE" property="userCode" />
+		<result column="USER_NAME" property="userName" />
+		<result column="USER_PWD" property="userPwd" />
+	</resultMap>
+	<select id="findById" parameterType="String" resultMap="UserResult">
+		SELECT USER_CODE,USER_NAME,USER_PWD,MAIL FROM BLOG_USER WHERE USER_CODE=#{userCode} AND USER_PWD=#{userPwd} AND USER_TYPE='2'
+	</select>
+
+	<update id="updateUser" parameterType="String">
+		UPDATE BLOG_USER SET USER_NAME=#{0} WHERE USER_CODE=#{1}
+	</update>
+	
+</mapper>
+<!-- error ,,,,resultMap wrong to resultType... -->
