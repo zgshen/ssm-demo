@@ -5,7 +5,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan( "com.open.ssm.controller" )
-public class WebConfig {
+public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public ViewResolver viewResolver(){
@@ -38,4 +40,10 @@ public class WebConfig {
 		multipartResolver.setDefaultEncoding("UTF-8");
 		return multipartResolver;
 	}
+	
+   //静态资源的处理
+   @Override
+   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+   }
 }
