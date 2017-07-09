@@ -7,6 +7,7 @@
 		<result column="USER_NAME" property="userName" />
 		<result column="USER_PWD" property="userPwd" />
 	</resultMap>
+	
 	<select id="findById" parameterType="String" resultMap="UserResult">
 		SELECT USER_CODE,USER_NAME,USER_PWD,MAIL FROM BLOG_USER WHERE USER_CODE=#{userCode} AND USER_PWD=#{userPwd} AND USER_TYPE='2'
 	</select>

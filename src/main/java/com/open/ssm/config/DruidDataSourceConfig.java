@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.entity.GlobalConfiguration;
+import com.baomidou.mybatisplus.mapper.IMetaObjectHandler;
+import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 
 /**
  *<p>Title: DruidDataSourceConfig.java</p>
@@ -135,12 +139,22 @@ public class DruidDataSourceConfig{
     	return namedParameterJdbcTemplate;
     }*/
     
+    //全局配置
+    public GlobalConfiguration globalConfigurationBean(){
+        GlobalConfiguration globalConfiguration = new GlobalConfiguration();
+        globalConfiguration.setIdType(2);//AUTO->`0`("数据库ID自增")、INPUT->`1`(用户输入ID")、ID_WORKER->`2`("全局唯一ID")、UUID->`3`("全局唯一ID")
+        globalConfiguration.setDbColumnUnderline(true);//全局表为下划线命名设置 true
+        return globalConfiguration;
+    }
+    
     //mybatis的配置
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException{
+    public MybatisSqlSessionFactoryBean sqlSessionFactoryBean() throws IOException{
     	ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();  
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();  
-        sqlSessionFactoryBean.setDataSource(dataSource());  
+        //SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean sqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();//mybatis-plus插件类
+        sqlSessionFactoryBean.setDataSource(dataSource());//数据源
+        sqlSessionFactoryBean.setGlobalConfig(globalConfigurationBean());//MP全局注入
         sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("classpath*:mappers/*.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("com.open.ssm.model");//别名，让*Mpper.xml实体类映射可以不加上具体包名
         return sqlSessionFactoryBean;
