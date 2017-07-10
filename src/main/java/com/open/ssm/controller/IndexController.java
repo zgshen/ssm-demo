@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *<p>Title: IndexController.java</p>
@@ -28,7 +29,7 @@ public class IndexController {
 	public String ssm(Model model){
 		LOG.info("---视图测试---");
 		model.addAttribute("data", "很抱歉，只做了一点微小的工作。");
-		return "ssm";
+		return "ssm.html";
 	}
 	
 	@RequestMapping("testForm")
@@ -44,7 +45,20 @@ public class IndexController {
 			localFile.mkdirs();
 		}
 		file.transferTo(localFile);
-		return "ssm";
+		return "ssm.html";
 	}
+	
+	@RequestMapping("best")
+	public ModelAndView beetlTest(){
+	    ModelAndView view = new ModelAndView();
+	    view.setViewName("test.html");
+	    view.addObject("user","ashen");
+	    return view;
+	}
+	
+	@RequestMapping("ssh")
+    public String beetlShen(){
+        return "shen.btl";
+    }
 	
 }
