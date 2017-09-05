@@ -25,4 +25,4 @@ hs_err_pid*
 #settings and so on
 .classpath
 .project
-/.settings/
+.settings/*
