@@ -58,7 +58,7 @@ public class IndexController {
 	
 	@RequestMapping("ssh")
     public String beetlShen(){
-        return "shen.btl";
+        return "page.btl";
     }
 	
 }

@@ -13,7 +13,7 @@
 	</select>
 
 	<update id="updateUser" parameterType="String">
-		UPDATE BLOG_USER SET USER_NAME=#{0} WHERE USER_CODE=#{1}
+		UPDATE BLOG_USER SET USER_NAME=#{userName} WHERE USER_CODE=#{userCode}
 	</update>
 	
 </mapper>

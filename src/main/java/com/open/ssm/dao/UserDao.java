@@ -7,7 +7,7 @@ import com.open.ssm.model.User;
 
 public interface UserDao extends BaseMapper<User>{
 	
-	/*User findById(@Param("userCode") String code,@Param("userPwd") String pwd);
+	User findById(@Param("userCode") String code,@Param("userPwd") String pwd);
 	
-	Integer updateUser(String userName, String userCode);*/
+	Integer updateUser(@Param("userName")String userName, @Param("userCode")String userCode);
 }
