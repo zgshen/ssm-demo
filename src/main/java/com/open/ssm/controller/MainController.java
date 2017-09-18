@@ -61,6 +61,7 @@ public class MainController {
 	public String main(){
 		User user = userService.findById("admin", "2ff4d63f4adb19d17cc0a99d2532b6a1");
 		LOG.info(user);
+		System.out.println(user.toString());
 		return "Welcome to ssm-demo...";
 	}
 	
