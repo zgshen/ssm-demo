@@ -1,17 +1,14 @@
 package com.open.ssm.config;
 
-import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *<p>Title: WebConfig.java</p>
@@ -47,11 +44,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return beetlSpringViewResolver;
     }   
     
-	//文件上传，bean必须写name属性且必须为multipartResolver，不然取不到文件对象，别问我为什么，我也唔知
+	//多文件上传，bean必须写name属性且必须为multipartResolver，不然取不到文件对象
 	@Bean(name="multipartResolver")
 	protected CommonsMultipartResolver MultipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		//multipartResolver.setUploadTempDir(new FileSystemResource("/tmp"));//可不设置
+		//multipartResolver.setUploadTempDir(new FileSystemResource("/tmp"));//可以不设置
 		multipartResolver.setMaxUploadSize(2097152);//2M
 		multipartResolver.setMaxInMemorySize(0);
 		multipartResolver.setDefaultEncoding("UTF-8");

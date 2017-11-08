@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService{
 	public Integer updateUser(String userName, String userCode) {
 		Integer num = userDao.updateUser(userName, userCode);
 		return num;
-	    //return null;
 	}
 
 }

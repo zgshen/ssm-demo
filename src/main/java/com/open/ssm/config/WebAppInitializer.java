@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 /**
  *<p>Title: SpittrWebAppInitializer.java</p>
- *<p>Description: 前端控制器配置</p>
+ *<p>Description: 应用启动入口和各类配置</p>
  *<p>CreateDate: 2017年6月12日</p>
  *@author shen
  *@version v1.0
